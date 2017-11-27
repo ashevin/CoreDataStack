@@ -13,6 +13,7 @@
 		8246E7551FC84B150087140A /* FetchedResultsTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246E7521FC84B150087140A /* FetchedResultsTableSection.swift */; };
 		8246E7561FC84B150087140A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246E7531FC84B150087140A /* CoreDataStack.swift */; };
 		8246E7571FC84B150087140A /* NSPredicate+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246E7541FC84B150087140A /* NSPredicate+extensions.swift */; };
+		827D266C1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827D266B1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		8246E7521FC84B150087140A /* FetchedResultsTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableSection.swift; sourceTree = "<group>"; };
 		8246E7531FC84B150087140A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8246E7541FC84B150087140A /* NSPredicate+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPredicate+extensions.swift"; sourceTree = "<group>"; };
+		827D266B1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+ExtensionsTests.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				8246E73C1FC84AEE0087140A /* CoreDataStackTests.swift */,
+				827D266B1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift */,
 				8246E73E1FC84AEE0087140A /* Info.plist */,
 			);
 			path = CoreDataStackTests;
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				827D266C1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift in Sources */,
 				8246E73D1FC84AEE0087140A /* CoreDataStackTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
