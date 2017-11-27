@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html"> Docs</a> (38% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html"> Reference</a>
+        <img id="carat" src="img/carat.png" />
+          Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/CoreDataStack.html">CoreDataStack</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/NSManagedObject.html">NSManagedObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions/NSManagedObjectContext.html">NSManagedObjectContext</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='coredatastack' class='heading'>CoreDataStack</h1>
+
+<p>CoreDataStack provides a simple all-in-one Core Data stack.  It is designed to make Core Data both safe and easy to use.  For applications which require high performance, via multiple writers, this project is not for you.</p>
+
+<p>CoreDataStack provides a readonly <code>NSManagedObjectContext</code> for use in the main thread.  Contexts for writing are vended as needed, and work is serialized on a background queue.</p>
+<h4 id='initialization' class='heading'>Initialization</h4>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">modelName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">storeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span>
+</code></pre>
+
+<p>Initializes a stack with the given model name and store type.</p>
+<pre class="highlight swift"><code><span class="n">convenience</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">modelName</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="k">throws</span>
+</code></pre>
+
+<p>Initializes a stack with the given model name and a store type of <code>NSSQLiteStoreType</code>.</p>
+<h2 id='working-with-managed-objects' class='heading'>Working with managed objects.</h2>
+<h4 id='modifying-objects' class='heading'>Modifying objects</h4>
+
+<p>The main workhorse is</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">perform</span><span class="p">(</span><span class="n">_</span> <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">CoreDataManagerUpdateBlock</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="p">())?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span>
+</code></pre>
+
+<p>This method will submit a block to a background context.  After the operation is complete, the completion is called on the same thread as the block.</p>
+
+<p><code>CoreDataManagerUpdateBlock</code> receives a context and a <code>shouldSave</code> boolean which may be modified by the block.  When set to <code>false</code>, all changes will be discarded.</p>
+<h4 id='querying-objects' class='heading'>Querying objects</h4>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">query</span><span class="p">(</span><span class="n">_</span> <span class="nv">block</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">CoreDataManagerQueryBlock</span><span class="p">)</span>
+</code></pre>
+
+<p>This method will submit a block which receives a readonly context.  The block runs on a background queue, and is intended for handling work which requires information from Core Data, but which does not need to modify it.  This block runs in parallel with <code>perform()</code> blocks.</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewQuery</span><span class="p">(</span><span class="n">_</span> <span class="nv">block</span><span class="p">:</span> <span class="kt">CoreDataManagerQueryBlock</span><span class="p">)</span>
+</code></pre>
+
+<p>This method submits a block on the <code>viewContext</code>, and should only be called from the main thread.</p>
+<h2 id='contexts' class='heading'>Contexts</h2>
+
+<p>Contexts which are used for modifying core data are vendored by the <code>perform()</code> method.  These contexts are destroyed after the block completes, and before the completion is invoked.</p>
+
+<p>Contexts which are used for background queries are vendored by the <code>query()</code> method.  These contexts are destroyed after the block is complete.  If the context has changes, a <code>fatalError()</code> is thrown.</p>
+
+<p>There is a special, persistent context, called the <code>viewContext</code>, used for querying Core Data on the main thread.  Changes made by <code>perform()</code> contexts are merged into this context when they are saved.</p>
+<h2 id='predicates' class='heading'>Predicates</h2>
+
+<p>Extensions to the <code>NSPredicate</code> class provide several methods and operators to simplify the creation of predicates.</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">predicate</span><span class="p">(</span><span class="k">for</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+</code></pre>
+
+<p>This method takes a dictionary of key-value pairs.  The keys are properties of the Core Data entity being queried.  The values are those which will satisfy the query.  Conditions are joined together using an <code>AND</code> predicate.</p>
+<h4 id='examples' class='heading'>Examples</h4>
+<pre class="highlight swift"><code><span class="c1">// someKey == 5</span>
+<span class="nf">predicate</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="s">"someKey"</span><span class="p">:</span> <span class="mi">5</span><span class="p">])</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="c1">// someKey BETWEEN 5 and 10</span>
+<span class="nf">predicate</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="s">"someKey"</span><span class="p">:</span> <span class="mi">5</span><span class="o">...</span><span class="mi">10</span><span class="p">])</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="c1">// someKey IN [1, 3, 5]</span>
+<span class="nf">predicate</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="p">[</span><span class="s">"someKey"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]])</span>
+</code></pre>
+<h3 id='compound-predicates' class='heading'>Compound predicates</h3>
+
+<p>It is also possible to create compound statements using the following methods.</p>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">or</span><span class="p">(</span><span class="n">_</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">or</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+</code></pre>
+<pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">and</span><span class="p">(</span><span class="n">_</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+
+<span class="kd">public</span> <span class="kd">func</span> <span class="nf">and</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+</code></pre>
+
+<p>Predicates may also be combined using the following operators.</p>
+<pre class="highlight swift"><code><span class="c1">// AND</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nv">left</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">,</span> <span class="nv">right</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+
+<span class="c1">// OR</span>
+<span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="o">||</span> <span class="p">(</span><span class="nv">left</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">,</span> <span class="nv">right</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span>
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external"></a>. All rights reserved. (Last updated: 2017-11-27)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

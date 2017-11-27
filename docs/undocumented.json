@@ -1,0 +1,159 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
+      "line": 12,
+      "symbol": "CoreDataStackError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
+      "line": 28,
+      "symbol": "CoreDataStack.viewContext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
+      "line": 335,
+      "symbol": "KillableMOC",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
+      "line": 363,
+      "symbol": "ReadOnlyMOC",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/FetchedResultsTableSection.swift",
+      "line": 14,
+      "symbol": "FetchedResultsTableSection",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/FetchedResultsTableSection.swift",
+      "line": 83,
+      "symbol": "UITableView.add(fetchedResultsSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/FetchedResultsTableSection.swift",
+      "line": 94,
+      "symbol": "UITableView.removeFetchedResultsSection(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/FetchedResultsTableSection.swift",
+      "line": 106,
+      "symbol": "UITableView.fetchedResultsSection(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/FetchedResultsTableSection.swift",
+      "line": 118,
+      "symbol": "UITableView.fetchedResultsSectionCount",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/FetchedResultsTableSection.swift",
+      "line": 126,
+      "symbol": "UITableView.objectForTable(at:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 12,
+      "symbol": "NSPredicate.or(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 16,
+      "symbol": "NSPredicate.and(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 20,
+      "symbol": "NSPredicate.or(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 24,
+      "symbol": "NSPredicate.and(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 28,
+      "symbol": "NSPredicate.&&(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 32,
+      "symbol": "NSPredicate.||(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 38,
+      "symbol": "NSPredicate.predicate(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 48,
+      "symbol": "NSPredicate.predicate(for:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 70,
+      "symbol": "NSPredicate.equalPredicate(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 74,
+      "symbol": "NSPredicate.inPredicate(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 78,
+      "symbol": "NSPredicate.closedRangePredicate(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 86,
+      "symbol": "NSPredicate.openRangePredicate(key:value:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/avi/Projects/CoreDataStack/CoreDataStack"
+}
