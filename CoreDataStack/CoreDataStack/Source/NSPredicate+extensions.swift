@@ -32,6 +32,14 @@ public extension NSPredicate {
     public static func || (left: NSPredicate, right: NSPredicate) -> NSPredicate {
         return left.or(right)
     }
+
+    public static func && (left: NSPredicate, right: [String: Any]) -> NSPredicate {
+        return left.and(right)
+    }
+
+    public static func || (left: NSPredicate, right: [String: Any]) -> NSPredicate {
+        return left.or(right)
+    }
 }
 
 public extension NSPredicate {
