@@ -1,0 +1,3 @@
+[submodule "SampleApp/AviControls"]
+	path = SampleApp/AviControls
+	url = git@github.com:ashevin/AviControls.git
