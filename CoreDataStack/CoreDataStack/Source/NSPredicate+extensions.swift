@@ -76,16 +76,29 @@ public extension NSPredicate {
     }
 
     static func equalPredicate(key: String, value: Any) -> NSPredicate {
+        if key.lowercased() == "self" {
+            return NSPredicate(format: "SELF == %@", argumentArray: [value])
+        }
+
         return NSPredicate(format: "%K == %@", argumentArray: [key, value])
     }
 
     static func inPredicate(key: String, value: Any) -> NSPredicate {
+        if key.lowercased() == "self" {
+            return NSPredicate(format: "SELF IN %@", argumentArray: [value])
+        }
+
         return NSPredicate(format: "%K IN %@", argumentArray: [key, value])
     }
 
     static func closedRangePredicate(key: String, value: CountableClosedRange<Int>) -> NSPredicate {
         let lower = value.lowerBound
         let upper = value.upperBound
+
+        if key.lowercased() == "self" {
+            return NSPredicate(format: "SELF >= %@ && SELF <= %@",
+                               argumentArray: [lower, upper])
+        }
 
         return NSPredicate(format: "%K >= %@ && %K <= %@",
                            argumentArray: [key, lower, key, upper])
@@ -94,6 +107,11 @@ public extension NSPredicate {
     static func openRangePredicate(key: String, value: CountableRange<Int>) -> NSPredicate {
         let lower = value.lowerBound
         let upper = value.upperBound
+
+        if key.lowercased() == "self" {
+            return NSPredicate(format: "SELF >= %@ && SELF < %@",
+                               argumentArray: [lower, upper])
+        }
 
         return NSPredicate(format: "%K >= %@ && %K < %@",
                            argumentArray: [key, lower, key, upper])
