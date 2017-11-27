@@ -268,7 +268,7 @@ public extension NSManagedObjectContext {
      */
     public func itemsMatching<T : NSManagedObject>(conditions: [String: Any]) throws -> [T] {
         let request = NSFetchRequest<NSManagedObject>(entityName: T.entityName)
-        request.predicate = NSPredicate.predicate(for: conditions)
+        request.predicate = NSPredicate(with: conditions)
 
         return try self.fetch(request) as! [T]
     }

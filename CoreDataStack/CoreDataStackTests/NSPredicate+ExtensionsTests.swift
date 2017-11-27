@@ -22,7 +22,8 @@ class NSPredicate_ExtensionsTests: XCTestCase {
 
     func test_equals() {
         let testValue = 3
-        let f = testArray.filtered(using: NSPredicate.predicate(for: [ "SELF": testValue ]))
+
+        let f = testArray.filtered(using: NSPredicate(with: [ "SELF": testValue ]))
 
         XCTAssertEqual(testValue, f.first as? Int)
     }
@@ -30,7 +31,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     func test_contains() {
         let testValue = [ 3 ]
 
-        let f = testArray.filtered(using: NSPredicate.predicate(for: [ "SELF": testValue ]))
+        let f = testArray.filtered(using: NSPredicate(with: [ "SELF": testValue ]))
 
         XCTAssertEqual(testValue.first, f.first as? Int)
     }
@@ -38,7 +39,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     func test_between_and_including() {
         let range = 5...7
 
-        let f = testArray.filtered(using: NSPredicate.predicate(for: [ "SELF": range ]))
+        let f = testArray.filtered(using: NSPredicate(with: [ "SELF": range ]))
 
         XCTAssertEqual(range.count, f.count)
         XCTAssertEqual(f[0] as? Int, 5)
@@ -49,7 +50,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     func test_between() {
         let range = 5..<7
 
-        let f = testArray.filtered(using: NSPredicate.predicate(for: [ "SELF": range ]))
+        let f = testArray.filtered(using: NSPredicate(with: [ "SELF": range ]))
 
         XCTAssertEqual(range.count, f.count)
         XCTAssertEqual(f[0] as? Int, 5)
@@ -57,7 +58,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_or_with_conditions() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]).or([ "SELF": 6 ])
+        let predicate = NSPredicate(with: [ "SELF": 5 ]).or([ "SELF": 6 ])
 
         let f = testArray.filtered(using: predicate)
 
@@ -67,7 +68,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_or_with_predicates() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]).or(NSPredicate(format: "SELF == 6"))
+        let predicate = NSPredicate(with: [ "SELF": 5 ]).or(NSPredicate(format: "SELF == 6"))
 
         let f = testArray.filtered(using: predicate)
 
@@ -77,7 +78,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_and_with_conditions() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]).and([ "SELF": [5, 6] ])
+        let predicate = NSPredicate(with: [ "SELF": 5 ]).and([ "SELF": [5, 6] ])
 
         let f = testArray.filtered(using: predicate)
 
@@ -86,7 +87,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_and_with_predicates() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]).and(NSPredicate(format: "SELF IN %@", [5, 6]))
+        let predicate = NSPredicate(with: [ "SELF": 5 ]).and(NSPredicate(format: "SELF IN %@", [5, 6]))
 
         let f = testArray.filtered(using: predicate)
 
@@ -95,7 +96,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_or_operator_with_predicate() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]) || NSPredicate.predicate(for:[ "SELF": 6 ])
+        let predicate = NSPredicate(with: [ "SELF": 5 ]) || NSPredicate(with:[ "SELF": 6 ])
 
         let f = testArray.filtered(using: predicate)
 
@@ -105,7 +106,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_or_operator_with_condition() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]) || [ "SELF": 6 ]
+        let predicate = NSPredicate(with: [ "SELF": 5 ]) || [ "SELF": 6 ]
 
         let f = testArray.filtered(using: predicate)
 
@@ -115,7 +116,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_and_operator_with_predicate() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]) && NSPredicate.predicate(for:[ "SELF": [5, 6] ])
+        let predicate = NSPredicate(with: [ "SELF": 5 ]) && NSPredicate(with: [ "SELF": [5, 6] ])
 
         let f = testArray.filtered(using: predicate)
 
@@ -124,7 +125,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
     }
 
     func test_and_operator_with_operator() {
-        let predicate = NSPredicate.predicate(for: [ "SELF": 5 ]) && [ "SELF": [5, 6] ]
+        let predicate = NSPredicate(with: [ "SELF": 5 ]) && [ "SELF": [5, 6] ]
 
         let f = testArray.filtered(using: predicate)
 

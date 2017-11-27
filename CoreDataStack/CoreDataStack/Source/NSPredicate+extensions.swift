@@ -10,11 +10,11 @@ import Foundation
 
 public extension NSPredicate {
     public func or(_ conditions: [String: Any]) -> NSPredicate {
-        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, NSPredicate.predicate(for: conditions)])
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
     }
 
     public func and(_ conditions: [String: Any]) -> NSPredicate {
-        return NSCompoundPredicate(andPredicateWithSubpredicates: [self, NSPredicate.predicate(for: conditions)])
+        return NSCompoundPredicate(andPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
     }
 
     public func or(_ predicate: NSPredicate) -> NSPredicate {
@@ -43,14 +43,19 @@ public extension NSPredicate {
 }
 
 public extension NSPredicate {
-    public static func predicate(for conditions: [String: Any]) -> NSPredicate {
+    public convenience init(with conditions: [String: Any]) {
         var predicates = [NSPredicate]()
 
         for (key, value) in conditions {
             predicates.append(NSPredicate.predicate(for: key, value: value))
         }
 
-        return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        var predicateString = predicates[0].predicateFormat
+        for i in 1..<predicates.count {
+            predicateString += " AND " + predicates[i].predicateFormat
+        }
+
+        self.init(format: predicateString)
     }
 
     static func predicate(for key: String, value: Any) -> NSPredicate {
