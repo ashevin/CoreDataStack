@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>NSManagedObjectContext Extension Reference</title>
+    <title>NSPredicate Extension Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Extension/NSManagedObjectContext" class="dashAnchor"></a>
-    <a title="NSManagedObjectContext Extension Reference"></a>
+    <a name="//apple_ref/swift/Extension/NSPredicate" class="dashAnchor"></a>
+    <a title="NSPredicate Extension Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html"> Docs</a> (57% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../index.html"> Reference</a>
         <img id="carat" src="../img/carat.png" />
-        NSManagedObjectContext Extension Reference
+        NSPredicate Extension Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -54,8 +54,18 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>NSManagedObjectContext</h1>
-            
+            <h1>NSPredicate</h1>
+            <p>A collection of convenience methods to ease the creation of simple predicates.  The primary
+simplification is the <code>conditions</code> dictionary.  This dictionary consists of key-value pairs in
+which the key is a property and the value is the parameter the property must match to satisfy the
+predicate.</p>
+
+<ul>
+<li>Scalar values generate an equality predicate (<code>==</code>).</li>
+<li>Sets or arrays generate a contains predicate (<code>IN</code>).</li>
+<li>Ranges generate a between predicate (open range: <code>K &gt;= X &amp;&amp; K &lt; Y</code>; closed range: <code>K &gt;= X &amp;&amp; K &lt;= Y</code>).</li>
+</ul>
+
           </section>
           <section class="section task-group-section">
             <div class="task-group">
@@ -63,9 +73,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So22NSManagedObjectContextC13CoreDataStackE13itemsMatchingSayxGs10DictionaryVySSypG10conditions_tKSo0aB0CRbzlF"></a>
-                    <a name="//apple_ref/swift/Method/itemsMatching(conditions:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So22NSManagedObjectContextC13CoreDataStackE13itemsMatchingSayxGs10DictionaryVySSypG10conditions_tKSo0aB0CRbzlF">itemsMatching(conditions:)</a>
+                    <a name="/s:So11NSPredicateC13CoreDataStackEABs10DictionaryVySSypG4with_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(with:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11NSPredicateC13CoreDataStackEABs10DictionaryVySSypG4with_tcfc">init(with:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -73,14 +83,22 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Loads items matching the given conditions (see <code>NSPredicate</code> extensions) into the context.</p>
+                        <p>The constructor takes a dictionary of key-value pairs in which the key is a property of the
+object to be filtered, and will be matched against the given property.  Multiple key-value pairs
+are joined using the <code>AND</code> operator.</p>
+
+<ul>
+<li>Scalar values generate an equality predicate (<code>==</code>).</li>
+<li>Sets or arrays generate a contains predicate (<code>IN</code>).</li>
+<li><p>Ranges generate a between predicate (open range: <code>K &gt;= X &amp;&amp; K &lt; Y</code>; closed range: <code>K &gt;= X &amp;&amp; K &lt;= Y</code>).</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">itemsMatching</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">NSManagedObject</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="n">convenience</span> <span class="nf">init</span><span class="p">(</span><span class="n">with</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -96,16 +114,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>A dictionary of conditions which will be converted into an <code>NSPredicate</code></p>
+                                  <p>The dictionary of key-value pairs which will form the body of the predicate</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An array of type <code>T</code></p>
                       </div>
                     </section>
                   </div>
@@ -113,9 +127,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So22NSManagedObjectContextC13CoreDataStackE4loadSayxGAE5items_tKSo0aB0CRbzlF"></a>
-                    <a name="//apple_ref/swift/Method/load(items:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So22NSManagedObjectContextC13CoreDataStackE4loadSayxGAE5items_tKSo0aB0CRbzlF">load(items:)</a>
+                    <a name="/s:So11NSPredicateC13CoreDataStackE3andABs10DictionaryVySSypGF"></a>
+                    <a name="//apple_ref/swift/Method/and(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11NSPredicateC13CoreDataStackE3andABs10DictionaryVySSypGF">and(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -123,15 +137,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Loads an array of items into the context.  Items must be of, or descend from, the type
-<code>NSManagedObject</code>.</p>
+                        <p>Returns a predicate which combines the receiver with a predicate, formed by the given
+conditions, with the <code>AND</code> operator.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">load</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">NSManagedObject</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">items</span><span class="p">:</span> <span class="p">[</span><span class="kt">T</span><span class="p">])</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="kt">T</span><span class="p">]</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">and</span><span class="p">(</span><span class="n">_</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span></code></pre>
 
                         </div>
                       </div>
@@ -142,21 +156,17 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>items</em>
+                                <em>conditions</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The array of items to load</p>
+                                  <p>The dictionary of key-value pairs which will form the body of the predicate</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An array of type <code>T</code></p>
                       </div>
                     </section>
                   </div>
@@ -164,9 +174,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So22NSManagedObjectContextC13CoreDataStackE4loadxx4item_tKSo0aB0CRbzlF"></a>
-                    <a name="//apple_ref/swift/Method/load(item:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So22NSManagedObjectContextC13CoreDataStackE4loadxx4item_tKSo0aB0CRbzlF">load(item:)</a>
+                    <a name="/s:So11NSPredicateC13CoreDataStackE2orABs10DictionaryVySSypGF"></a>
+                    <a name="//apple_ref/swift/Method/or(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11NSPredicateC13CoreDataStackE2orABs10DictionaryVySSypGF">or(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -174,14 +184,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Loads an item into the context.  Items must be of, or descend from, the type <code>NSManagedObject</code>.</p>
+                        <p>Returns a predicate which combines the receiver with a predicate, formed by the given
+conditions, with the <code>OR</code> operator.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">load</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">NSManagedObject</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">item</span><span class="p">:</span> <span class="kt">T</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">or</span><span class="p">(</span><span class="n">_</span> <span class="nv">conditions</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span></code></pre>
 
                         </div>
                       </div>
@@ -192,21 +203,17 @@
                             <tr>
                               <td>
                                 <code>
-                                <em>item</em>
+                                <em>conditions</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The item to load</p>
+                                  <p>The dictionary of key-value pairs which will form the body of the predicate</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>An object of type <code>T</code></p>
                       </div>
                     </section>
                   </div>
@@ -214,9 +221,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:So22NSManagedObjectContextC13CoreDataStackE4loadxSo0aB2IDC06objectH0_tKSo0aB0CRbzlF"></a>
-                    <a name="//apple_ref/swift/Method/load(objectID:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:So22NSManagedObjectContextC13CoreDataStackE4loadxSo0aB2IDC06objectH0_tKSo0aB0CRbzlF">load(objectID:)</a>
+                    <a name="/s:So11NSPredicateC13CoreDataStackE3andA2BF"></a>
+                    <a name="//apple_ref/swift/Method/and(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11NSPredicateC13CoreDataStackE3andA2BF">and(_:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -224,15 +231,15 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Loads an item with the given <code>objectID</code> into the context.  Items must be of, or descend from,
-the type <code>NSManagedObject</code>.</p>
+                        <p>Returns a predicate which combines the receiver with the given predicate, using the <code>AND</code>
+operator.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="n">load</span><span class="o">&lt;</span><span class="kt">T</span> <span class="p">:</span> <span class="kt">NSManagedObject</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">objectID</span><span class="p">:</span> <span class="kt">NSManagedObjectID</span><span class="p">)</span> <span class="k">throws</span> <span class="o">-&gt;</span> <span class="kt">T</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">and</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span></code></pre>
 
                         </div>
                       </div>
@@ -243,21 +250,64 @@ the type <code>NSManagedObject</code>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>objectID</em>
+                                <em>predicate</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The <code>NSManagedObjectID</code> to load</p>
+                                  <p>The predicate to combine with the receiver</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:So11NSPredicateC13CoreDataStackE2orA2BF"></a>
+                    <a name="//apple_ref/swift/Method/or(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:So11NSPredicateC13CoreDataStackE2orA2BF">or(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns a predicate which combines the receiver with the given predicate, using the <code>OR</code>
+operator.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">or</span><span class="p">(</span><span class="n">_</span> <span class="nv">predicate</span><span class="p">:</span> <span class="kt">NSPredicate</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">NSPredicate</span></code></pre>
+
+                        </div>
+                      </div>
                       <div>
-                        <h4>Return Value</h4>
-                        <p>An object of type <code>T</code></p>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>predicate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The predicate to combine with the receiver</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>

@@ -8,21 +8,82 @@
 
 import Foundation
 
+/**
+ A collection of convenience methods to ease the creation of simple predicates.  The primary
+ simplification is the `conditions` dictionary.  This dictionary consists of key-value pairs in
+ which the key is a property and the value is the parameter the property must match to satisfy the
+ predicate.
+
+ - Scalar values generate an equality predicate (`==`).
+ - Sets or arrays generate a contains predicate (`IN`).
+ - Ranges generate a between predicate (open range: `K >= X && K < Y`; closed range: `K >= X && K <= Y`).
+ */
+
 public extension NSPredicate {
-    public func or(_ conditions: [String: Any]) -> NSPredicate {
-        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
+    /**
+     The constructor takes a dictionary of key-value pairs in which the key is a property of the
+     object to be filtered, and will be matched against the given property.  Multiple key-value pairs
+     are joined using the `AND` operator.
+
+     - Scalar values generate an equality predicate (`==`).
+     - Sets or arrays generate a contains predicate (`IN`).
+     - Ranges generate a between predicate (open range: `K >= X && K < Y`; closed range: `K >= X && K <= Y`).
+
+     - parameter conditions: The dictionary of key-value pairs which will form the body of the predicate
+     */
+    public convenience init(with conditions: [String: Any]) {
+        var predicates = [NSPredicate]()
+
+        for (key, value) in conditions {
+            predicates.append(NSPredicate.predicate(for: key, value: value))
+        }
+
+        var predicateString = predicates[0].predicateFormat
+        for i in 1..<predicates.count {
+            predicateString += " AND " + predicates[i].predicateFormat
+        }
+
+        self.init(format: predicateString)
     }
 
+    /**
+     Returns a predicate which combines the receiver with a predicate, formed by the given
+     conditions, with the `AND` operator.
+
+     - parameter conditions: The dictionary of key-value pairs which will form the body of the predicate
+     */
     public func and(_ conditions: [String: Any]) -> NSPredicate {
         return NSCompoundPredicate(andPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
     }
 
-    public func or(_ predicate: NSPredicate) -> NSPredicate {
-        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, predicate])
+    /**
+     Returns a predicate which combines the receiver with a predicate, formed by the given
+     conditions, with the `OR` operator.
+
+     - parameter conditions: The dictionary of key-value pairs which will form the body of the predicate
+     */
+    public func or(_ conditions: [String: Any]) -> NSPredicate {
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
     }
 
+    /**
+     Returns a predicate which combines the receiver with the given predicate, using the `AND`
+     operator.
+
+     - parameter predicate: The predicate to combine with the receiver
+     */
     public func and(_ predicate: NSPredicate) -> NSPredicate {
         return NSCompoundPredicate(andPredicateWithSubpredicates: [self, predicate])
+    }
+
+    /**
+     Returns a predicate which combines the receiver with the given predicate, using the `OR`
+     operator.
+
+     - parameter predicate: The predicate to combine with the receiver
+     */
+    public func or(_ predicate: NSPredicate) -> NSPredicate {
+        return NSCompoundPredicate(orPredicateWithSubpredicates: [self, predicate])
     }
 
     public static func && (left: NSPredicate, right: NSPredicate) -> NSPredicate {
@@ -42,22 +103,7 @@ public extension NSPredicate {
     }
 }
 
-public extension NSPredicate {
-    public convenience init(with conditions: [String: Any]) {
-        var predicates = [NSPredicate]()
-
-        for (key, value) in conditions {
-            predicates.append(NSPredicate.predicate(for: key, value: value))
-        }
-
-        var predicateString = predicates[0].predicateFormat
-        for i in 1..<predicates.count {
-            predicateString += " AND " + predicates[i].predicateFormat
-        }
-
-        self.init(format: predicateString)
-    }
-
+private extension NSPredicate {
     static func predicate(for key: String, value: Any) -> NSPredicate {
         let predicate: NSPredicate
         if value is CountableClosedRange<Int> {

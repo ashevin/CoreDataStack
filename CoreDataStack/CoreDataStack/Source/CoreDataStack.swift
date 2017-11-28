@@ -173,7 +173,7 @@ extension CoreDataStack {
      to the main thread if necessary.
 
      - parameter block: A block which performs modifications to Core Data entities
-     - parameter completion: A block which is invoked after the context has been saved.
+     - parameter completion: A block which is invoked after the context has been saved
      */
     public func perform(_ block: @escaping CoreDataManagerUpdateBlock, completion: (() -> ())? = nil) {
         guard isShuttingDown == false else {
@@ -260,11 +260,11 @@ public extension NSManagedObject {
 
 public extension NSManagedObjectContext {
     /**
-     Loads items matching the given conditions [see `NSPredicate+extensions`] into the context.
+     Loads items matching the given conditions (see `NSPredicate` extensions) into the context.
 
      - parameter conditions: A dictionary of conditions which will be converted into an `NSPredicate`
 
-     - returns: An array of type `T`.
+     - returns: An array of objects of type `T`
      */
     public func itemsMatching<T : NSManagedObject>(conditions: [String: Any]) throws -> [T] {
         let request = NSFetchRequest<NSManagedObject>(entityName: T.entityName)
@@ -274,11 +274,12 @@ public extension NSManagedObjectContext {
     }
 
     /**
-     Loads an array of items into the context.
+     Loads an array of items into the context.  Items must be of, or descend from, the type
+     `NSManagedObject`.
 
-     - parameter items: The array of items to load.
+     - parameter items: The array of items to load
 
-     - returns: An array of type `T`.
+     - returns: An array of objects of type `T`
      */
     public func load<T : NSManagedObject>(items: [T]) throws -> [T] {
         let request = NSFetchRequest<NSManagedObject>(entityName: T.entityName)
@@ -288,22 +289,23 @@ public extension NSManagedObjectContext {
     }
 
     /**
-     Loads an item into the context.
+     Loads an item into the context.  Items must be of, or descend from, the type `NSManagedObject`.
 
-     - parameter item: The item to load.
+     - parameter item: The item to load
 
-     - returns: An `NSManagedObject` of type `T`.
+     - returns: An object of type `T`
      */
     public func load<T : NSManagedObject>(item: T) throws -> T {
         return try existingObject(with: item.objectID) as! T
     }
 
     /**
-     Loads an item into the context.
+     Loads an item with the given `objectID` into the context.  Items must be of, or descend from,
+     the type `NSManagedObject`.
 
-     - parameter objectID: The `NSManagedObjectID` to load.
+     - parameter objectID: The `NSManagedObjectID` to load
 
-     - returns: An `NSManagedObject` of type `T`.
+     - returns: An object of type `T`
      */
     public func load<T : NSManagedObject>(objectID: NSManagedObjectID) throws -> T {
         return try existingObject(with: objectID) as! T
