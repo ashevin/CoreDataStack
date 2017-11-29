@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreData
 import CoreDataStack
 
 @UIApplicationMain
@@ -18,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let coreDataStack: CoreDataStack?
 
     override init() {
-        coreDataStack = try? CoreDataStack(modelName: "CoreDataManager", storeType: NSSQLiteStoreType)
+        coreDataStack = try? CoreDataStack(modelName: "SampleApp", storeType: NSSQLiteStoreType)
 
         super.init()
     }
