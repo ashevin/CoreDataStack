@@ -32,18 +32,23 @@ public extension NSPredicate {
      - parameter conditions: The dictionary of key-value pairs which will form the body of the predicate
      */
     public convenience init(with conditions: [String: Any]) {
-        var predicates = [NSPredicate]()
+        var predicateFormats = [String]()
+        var predicateArgs = [Any]()
 
         for (key, value) in conditions {
-            predicates.append(NSPredicate.predicate(for: key, value: value))
+            let (format, args) = NSPredicate.predicateFormat(for: key, value: value)
+
+            predicateFormats.append(format)
+
+            args.forEach { predicateArgs.append($0) }
         }
 
-        var predicateString = predicates[0].predicateFormat
-        for i in 1..<predicates.count {
-            predicateString += " AND " + predicates[i].predicateFormat
+        var predicateString = predicateFormats[0]
+        for i in 1..<predicateFormats.count {
+            predicateString += " AND " + predicateFormats[i]
         }
 
-        self.init(format: predicateString)
+        self.init(format: predicateString, argumentArray: predicateArgs)
     }
 
     /**
@@ -104,67 +109,60 @@ public extension NSPredicate {
 }
 
 private extension NSPredicate {
-    static func predicate(for key: String, value: Any) -> NSPredicate {
-        let predicate: NSPredicate
+    static func predicateFormat(for key: String, value: Any) -> (String, [Any]) {
         if value is CountableClosedRange<Int> {
             let range = value as! CountableClosedRange<Int>
 
-            predicate = closedRangePredicate(key: key, value: range)
+            return closedRangePredicateFormat(key: key, value: range)
         }
         else if value is CountableRange<Int> {
             let range = value as! CountableRange<Int>
 
-            predicate = openRangePredicate(key: key, value: range)
+            return openRangePredicateFormat(key: key, value: range)
         }
         else if value is Set<AnyHashable> || value is Array<AnyHashable> {
-            predicate = inPredicate(key: key, value: value)
+            return inPredicateFormat(key: key, value: value)
         }
         else {
-            predicate = equalPredicate(key: key, value: value)
+            return equalPredicateFormat(key: key, value: value)
         }
-
-        return predicate
     }
 
-    static func equalPredicate(key: String, value: Any) -> NSPredicate {
+    static func equalPredicateFormat(key: String, value: Any) -> (String, [Any]) {
         if key.lowercased() == "self" {
-            return NSPredicate(format: "SELF == %@", argumentArray: [value])
+            return ("SELF == %@", [value])
         }
 
-        return NSPredicate(format: "%K == %@", argumentArray: [key, value])
+        return ("%K == %@", [key, value])
     }
 
-    static func inPredicate(key: String, value: Any) -> NSPredicate {
+    static func inPredicateFormat(key: String, value: Any) -> (String, [Any]) {
         if key.lowercased() == "self" {
-            return NSPredicate(format: "SELF IN %@", argumentArray: [value])
+            return ("SELF IN %@", [value])
         }
 
-        return NSPredicate(format: "%K IN %@", argumentArray: [key, value])
+        return ("%K IN %@", [key, value])
     }
 
-    static func closedRangePredicate(key: String, value: CountableClosedRange<Int>) -> NSPredicate {
+    static func closedRangePredicateFormat(key: String, value: CountableClosedRange<Int>) -> (String, [Any]) {
         let lower = value.lowerBound
         let upper = value.upperBound
 
         if key.lowercased() == "self" {
-            return NSPredicate(format: "SELF >= %@ && SELF <= %@",
-                               argumentArray: [lower, upper])
+            return ("SELF >= %@ && SELF <= %@", [lower, upper])
         }
 
-        return NSPredicate(format: "%K >= %@ && %K <= %@",
-                           argumentArray: [key, lower, key, upper])
+        return ("%K >= %@ && %K <= %@", [key, lower, key, upper])
     }
 
-    static func openRangePredicate(key: String, value: CountableRange<Int>) -> NSPredicate {
+    static func openRangePredicateFormat(key: String, value: CountableRange<Int>) -> (String, [Any]) {
         let lower = value.lowerBound
         let upper = value.upperBound
 
         if key.lowercased() == "self" {
-            return NSPredicate(format: "SELF >= %@ && SELF < %@",
-                               argumentArray: [lower, upper])
+            return ("SELF >= %@ && SELF < %@", [lower, upper])
         }
 
-        return NSPredicate(format: "%K >= %@ && %K < %@",
-                           argumentArray: [key, lower, key, upper])
+        return ("%K >= %@ && %K < %@", [key, lower, key, upper])
     }
 }
