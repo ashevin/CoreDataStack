@@ -69,7 +69,9 @@ class NewOldFooViewController: UIViewController {
                 foo.bar = try? context.load(objectID: bar)
             }
         }) {
-            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 

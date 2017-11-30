@@ -13,7 +13,7 @@ public enum CoreDataStackError: Error {
     case missingModelName
 }
 
-public typealias CoreDataManagerUpdateBlock = (NSManagedObjectContext, inout Bool) -> ()
+public typealias CoreDataManagerUpdateBlock = (NSManagedObjectContext, inout Bool) throws -> ()
 public typealias CoreDataManagerQueryBlock = (NSManagedObjectContext) -> ()
 
 /**
@@ -173,28 +173,35 @@ extension CoreDataStack {
      to the main thread if necessary.
 
      - parameter block: A block which performs modifications to Core Data entities
-     - parameter completion: A block which is invoked after the context has been saved
+     - parameter completion: A block which is invoked after the context has been saved.  The block
+     receives an optional Error, which will be non-`nil` if the block threw an error.
      */
-    public func perform(_ block: @escaping CoreDataManagerUpdateBlock, completion: (() -> ())? = nil) {
+    public func perform(_ block: @escaping CoreDataManagerUpdateBlock, completion: ((Error?) -> ())? = nil) {
         guard isShuttingDown == false else {
             return
         }
 
         let context = viewContext.backgroundCloneRW
         var shouldSave = true
+        var error: Error?
 
         queue.addOperation {
             context.performAndWait {
-                block(context, &shouldSave)
-            }
+                do {
+                    try block(context, &shouldSave)
 
-            if shouldSave {
-                try? context.save()
+                    if shouldSave {
+                        try context.save()
+                    }
+                }
+                catch let e {
+                    error = e
+                }
             }
 
             context.killed = true
 
-            completion?()
+            completion?(error)
         }
     }
 
