@@ -274,10 +274,24 @@ public extension NSManagedObjectContext {
      - returns: An array of objects of type `T`
      */
     public func itemsMatching<T : NSManagedObject>(conditions: [String: Any]) throws -> [T] {
-        let request = NSFetchRequest<NSManagedObject>(entityName: T.entityName)
+        let request = NSFetchRequest<T>(entityName: T.entityName)
         request.predicate = NSPredicate(with: conditions)
 
-        return try self.fetch(request) as! [T]
+        return try self.fetch(request)
+    }
+
+    /**
+     Loads items matching the given predicate into the context.
+
+     - parameter predicate: A predicate against which to filter the items to load
+
+     - returns: An array of objects of type `T`
+     */
+    public func itemsMatching<T : NSManagedObject>(predicate: NSPredicate) throws -> [T] {
+        let request = NSFetchRequest<T>(entityName: T.entityName)
+        request.predicate = predicate
+
+        return try self.fetch(request)
     }
 
     /**
