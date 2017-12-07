@@ -14,6 +14,7 @@
 		8246E7561FC84B150087140A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246E7531FC84B150087140A /* CoreDataStack.swift */; };
 		8246E7571FC84B150087140A /* NSPredicate+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246E7541FC84B150087140A /* NSPredicate+extensions.swift */; };
 		827D266C1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 827D266B1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift */; };
+		82C410451FD99EEE00D425D6 /* EntityWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C410441FD99EEE00D425D6 /* EntityWatcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 		8246E7531FC84B150087140A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		8246E7541FC84B150087140A /* NSPredicate+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPredicate+extensions.swift"; sourceTree = "<group>"; };
 		827D266B1FCC3BA5008A6792 /* NSPredicate+ExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+ExtensionsTests.swift"; sourceTree = "<group>"; };
+		82C410441FD99EEE00D425D6 /* EntityWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityWatcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		8246E7511FC84B000087140A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				82C410441FD99EEE00D425D6 /* EntityWatcher.swift */,
 				8246E7531FC84B150087140A /* CoreDataStack.swift */,
 				8246E7541FC84B150087140A /* NSPredicate+extensions.swift */,
 				8246E7521FC84B150087140A /* FetchedResultsTableSection.swift */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8246E7571FC84B150087140A /* NSPredicate+extensions.swift in Sources */,
+				82C410451FD99EEE00D425D6 /* EntityWatcher.swift in Sources */,
 				8246E7551FC84B150087140A /* FetchedResultsTableSection.swift in Sources */,
 				8246E7561FC84B150087140A /* CoreDataStack.swift in Sources */,
 			);
