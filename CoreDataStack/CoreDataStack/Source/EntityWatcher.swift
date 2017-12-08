@@ -30,9 +30,7 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
     private var changeBlock: EventHandler?
     private var didChangeBlock: EventHandler?
 
-    private var didFetch = false
-
-    public init(predicate: NSPredicate, sortKey: String, context: NSManagedObjectContext) {
+    public init(predicate: NSPredicate, sortKey: String, context: NSManagedObjectContext) throws {
         let request = NSFetchRequest<Entity>(entityName: Entity.entityName)
         request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: true)]
@@ -45,6 +43,8 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
         super.init()
 
         frc.delegate = self
+
+        try frc.performFetch()
     }
 
     public func on(_ event: Event, handler: @escaping EventHandler) {
@@ -52,12 +52,6 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
         case .willChange: willChangeBlock = handler
         case .change: changeBlock = handler
         case .didChange: didChangeBlock = handler
-        }
-
-        if didFetch == false {
-            try? frc.performFetch()
-
-            didFetch = true
         }
     }
 
