@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-public typealias CellConfigurationBlock = (UITableViewCell?, IndexPath) -> ()
+public typealias CellConfigurationBlock = (UITableViewCell, IndexPath) -> ()
 
 public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDelegate {
     weak var table: UITableView?
