@@ -14,7 +14,7 @@ public typealias CellConfigurationBlock = (UITableViewCell, IndexPath) -> ()
 public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDelegate {
     weak var table: UITableView?
     let section: Int
-    public let configureBlock: CellConfigurationBlock
+    public let configureBlock: CellConfigurationBlock?
     var frc: NSFetchedResultsController<NSManagedObject>? {
         didSet {
             frc?.delegate = self
@@ -29,7 +29,7 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
 
     public init(table: UITableView,
                 frc: NSFetchedResultsController<NSManagedObject>?,
-                configureBlock: @escaping CellConfigurationBlock) {
+                configureBlock: CellConfigurationBlock?) {
         self.table = table
         self.section = table.fetchedResultsSectionCount
         self.frc = frc
