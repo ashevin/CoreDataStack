@@ -70,7 +70,7 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
         switch type {
         case .insert: table?.insertRows(at: [nip], with: .automatic)
         case .delete: table?.deleteRows(at: [ip], with: .automatic)
-        case .update: configureBlock(table?.cellForRow(at: ip), ip)
+        case .update: table?.reloadRows(at: [ip], with: .none)
         case .move:
             table?.moveRow(at: ip, to: nip)
         }
