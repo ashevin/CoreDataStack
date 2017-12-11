@@ -16,14 +16,14 @@
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
-      "line": 335,
+      "line": 337,
       "symbol": "KillableMOC",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
-      "line": 363,
+      "line": 365,
       "symbol": "ReadOnlyMOC",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"

@@ -9,19 +9,42 @@
 import Foundation
 import CoreData
 
+/**
+ This class provides a generics and block-based API for `NSFetchedResultsController`.
+ */
+
 public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
+    /**
+     The type to which the managed objects will be cast.  This will be the object type received in
+     the `Change` paramater of the `change` event handler.
+     */
     public typealias Entity = T
     public typealias EventHandler = (Change?) -> Void
 
+    /**
+    `Events` mirrors the methods of `NSFetchedResultsControllerDelegate`.  An application may
+     register for just those events it is interested in.
+     */
     public enum Event {
+        /// The `willChange` handler is invoked in response to `controllerWillChangeContent(:)`.
         case willChange
+
+        /// The `change` handler is invoked in response to `controller(:didChange::::)`.
+
         case change
+
+        /// The `didChange` handler is invoked in response to `controllerDidChangeContent(:)`.
         case didChange
     }
 
+    /**
+     This struct packages the parameters of the `controller(:didChange::::)` delegate method.
+     */
     public struct Change {
         public let entity: Entity
         public let type: NSFetchedResultsChangeType
+        public let indexPath: IndexPath?
+        public let newIndexPath: IndexPath?
     }
 
     private let frc: NSFetchedResultsController<Entity>
@@ -30,6 +53,14 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
     private var changeBlock: EventHandler?
     private var didChangeBlock: EventHandler?
 
+    /**
+     Create an instance of `EntityWatcher` with a simple sort descriptor.
+
+     - parameter predicate: The predicate for the fetched results controller's request
+     - parameter sortKey: The key to be used for the sort descriptor
+     - parameter ascending: Determines the order in which results are sorted.  Defaults to `true`
+     - parameter context: The `NSManagedObjectContext` in which changes should be observed
+     */
     convenience public init(predicate: NSPredicate,
                             sortKey: String,
                             ascending: Bool = true,
@@ -39,6 +70,13 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
                       context: context)
     }
 
+    /**
+     Create an instance of `EntityWatcher`.
+
+     - parameter predicate: The predicate for the fetched results controller's request
+     - parameter sortDescriptors: An array of `NSSortDescriptor` for sorting the results
+     - parameter context: The `NSManagedObjectContext` in which changes should be observed
+     */
     public init(predicate: NSPredicate,
                 sortDescriptors: [NSSortDescriptor],
                 context: NSManagedObjectContext) throws {
@@ -58,6 +96,12 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
         try frc.performFetch()
     }
 
+    /**
+     This method registers a handler for the given `Event`.
+
+     - parameter event: The `Event` for which the handler is invoked
+     - parameter handler: The event handler.  For `willChange` and `didChange` events, the `Change` parameter is `nil`.
+     */
     public func on(_ event: Event, handler: @escaping EventHandler) {
         switch event {
         case .willChange: willChangeBlock = handler
@@ -79,7 +123,7 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
             fatalError("How did that happen?!")
         }
 
-        changeBlock?(Message(entity: object, type: type))
+        changeBlock?(Change(entity: object, type: type, indexPath: indexPath, newIndexPath: newIndexPath))
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
