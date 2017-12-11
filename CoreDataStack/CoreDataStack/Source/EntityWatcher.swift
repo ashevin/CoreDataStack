@@ -11,7 +11,7 @@ import CoreData
 
 public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
     public typealias Entity = T
-    public typealias EventHandler = (Message?) -> Void
+    public typealias EventHandler = (Change?) -> Void
 
     public enum Event {
         case willChange
@@ -19,7 +19,7 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
         case didChange
     }
 
-    public struct Message {
+    public struct Change {
         public let entity: Entity
         public let type: NSFetchedResultsChangeType
     }
@@ -30,10 +30,21 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
     private var changeBlock: EventHandler?
     private var didChangeBlock: EventHandler?
 
-    public init(predicate: NSPredicate, sortKey: String, context: NSManagedObjectContext) throws {
+    convenience public init(predicate: NSPredicate,
+                            sortKey: String,
+                            ascending: Bool = true,
+                            context: NSManagedObjectContext) throws {
+        try self.init(predicate: predicate,
+                      sortDescriptors: [NSSortDescriptor(key: sortKey, ascending: ascending)],
+                      context: context)
+    }
+
+    public init(predicate: NSPredicate,
+                sortDescriptors: [NSSortDescriptor],
+                context: NSManagedObjectContext) throws {
         let request = NSFetchRequest<Entity>(entityName: Entity.entityName)
         request.predicate = predicate
-        request.sortDescriptors = [NSSortDescriptor(key: sortKey, ascending: true)]
+        request.sortDescriptors = sortDescriptors
 
         frc = NSFetchedResultsController<Entity>(fetchRequest: request,
                                                  managedObjectContext: context,
