@@ -16,16 +16,65 @@
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
-      "line": 337,
+      "line": 358,
       "symbol": "KillableMOC",
       "symbol_kind": "source.lang.swift.decl.class",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/CoreDataStack.swift",
-      "line": 365,
+      "line": 386,
       "symbol": "ReadOnlyMOC",
       "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 44,
+      "symbol": "EntityWatcher.Change.entity",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 45,
+      "symbol": "EntityWatcher.Change.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 46,
+      "symbol": "EntityWatcher.Change.indexPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 47,
+      "symbol": "EntityWatcher.Change.newIndexPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 113,
+      "symbol": "EntityWatcher.controllerWillChangeContent(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 117,
+      "symbol": "EntityWatcher.controller(_:didChange:at:for:newIndexPath:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/EntityWatcher.swift",
+      "line": 129,
+      "symbol": "EntityWatcher.controllerDidChangeContent(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
@@ -72,28 +121,28 @@
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 89,
+      "line": 94,
       "symbol": "NSPredicate.&&(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 93,
+      "line": 98,
       "symbol": "NSPredicate.||(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 97,
+      "line": 102,
       "symbol": "NSPredicate.&&(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 101,
+      "line": 106,
       "symbol": "NSPredicate.||(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"

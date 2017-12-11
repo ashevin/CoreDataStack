@@ -30,7 +30,6 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
         case willChange
 
         /// The `change` handler is invoked in response to `controller(:didChange::::)`.
-
         case change
 
         /// The `didChange` handler is invoked in response to `controllerDidChangeContent(:)`.
@@ -41,9 +40,16 @@ public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsContr
      This struct packages the parameters of the `controller(:didChange::::)` delegate method.
      */
     public struct Change {
+        /// The `NSManagedObject` which changed
         public let entity: Entity
+
+        /// The type of change
         public let type: NSFetchedResultsChangeType
+
+        /// The index path of the changed object (this value is nil for insertions)
         public let indexPath: IndexPath?
+
+        /// The destination path for the object for insertions or moves (this value is nil for a deletion)
         public let newIndexPath: IndexPath?
     }
 

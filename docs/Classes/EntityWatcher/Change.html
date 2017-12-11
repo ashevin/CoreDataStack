@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Event Enumeration Reference</title>
+    <title>Change Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Enum/Event" class="dashAnchor"></a>
-    <a title="Event Enumeration Reference"></a>
+    <a name="//apple_ref/swift/Struct/Change" class="dashAnchor"></a>
+    <a title="Change Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../../index.html"> Docs</a> (66% documented)</p>
@@ -21,7 +21,7 @@
       <p id="breadcrumbs">
         <a href="../../index.html"> Reference</a>
         <img id="carat" src="../../img/carat.png" />
-        Event Enumeration Reference
+        Change Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -63,15 +63,14 @@
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>Event</h1>
+            <h1>Change</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Event</span></code></pre>
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Change</span></code></pre>
 
                 </div>
               </div>
-            <p><code>Events</code> mirrors the methods of <code>NSFetchedResultsControllerDelegate</code>.  An application may
- register for just those events it is interested in.</p>
+            <p>This struct packages the parameters of the <code>controller(:didChange::::)</code> delegate method.</p>
 
           </section>
           <section class="section task-group-section">
@@ -80,9 +79,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13CoreDataStack13EntityWatcherC5EventO10willChangeAEyx_GAGmSo15NSManagedObjectCRbzlF"></a>
-                    <a name="//apple_ref/swift/Element/willChange" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC5EventO10willChangeAEyx_GAGmSo15NSManagedObjectCRbzlF">willChange</a>
+                    <a name="/s:13CoreDataStack13EntityWatcherC6ChangeV6entityxv"></a>
+                    <a name="//apple_ref/swift/Property/entity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC6ChangeV6entityxv">entity</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -90,30 +89,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>willChange</code> handler is invoked in response to <code>controllerWillChangeContent(:)</code>.</p>
+                        <p>The <code>NSManagedObject</code> which changed</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">willChange</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">entity</span><span class="p">:</span> <span class="kt"><a href="../../Classes/EntityWatcher.html#/s:13CoreDataStack13EntityWatcherC0D0a">Entity</a></span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13CoreDataStack13EntityWatcherC5EventO6changeAEyx_GAGmSo15NSManagedObjectCRbzlF"></a>
-                    <a name="//apple_ref/swift/Element/change" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC5EventO6changeAEyx_GAGmSo15NSManagedObjectCRbzlF">change</a>
+                    <a name="/s:13CoreDataStack13EntityWatcherC6ChangeV4typeSC016NSFetchedResultsF4TypeOv"></a>
+                    <a name="//apple_ref/swift/Property/type" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC6ChangeV4typeSC016NSFetchedResultsF4TypeOv">type</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -121,30 +116,26 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>change</code> handler is invoked in response to <code>controller(:didChange::::)</code>.</p>
+                        <p>The type of change</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">change</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">type</span><span class="p">:</span> <span class="kt">NSFetchedResultsChangeType</span></code></pre>
 
                         </div>
                       </div>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13CoreDataStack13EntityWatcherC5EventO9didChangeAEyx_GAGmSo15NSManagedObjectCRbzlF"></a>
-                    <a name="//apple_ref/swift/Element/didChange" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC5EventO9didChangeAEyx_GAGmSo15NSManagedObjectCRbzlF">didChange</a>
+                    <a name="/s:13CoreDataStack13EntityWatcherC6ChangeV9indexPath10Foundation05IndexH0VSgv"></a>
+                    <a name="//apple_ref/swift/Property/indexPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC6ChangeV9indexPath10Foundation05IndexH0VSgv">indexPath</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -152,14 +143,41 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The <code>didChange</code> handler is invoked in response to <code>controllerDidChangeContent(:)</code>.</p>
+                        <p>The index path of the changed object (this value is nil for insertions)</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">didChange</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">indexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CoreDataStack13EntityWatcherC6ChangeV12newIndexPath10Foundation0hI0VSgv"></a>
+                    <a name="//apple_ref/swift/Property/newIndexPath" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CoreDataStack13EntityWatcherC6ChangeV12newIndexPath10Foundation0hI0VSgv">newIndexPath</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The destination path for the object for insertions or moves (this value is nil for a deletion)</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">newIndexPath</span><span class="p">:</span> <span class="kt">IndexPath</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
