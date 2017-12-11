@@ -95,17 +95,16 @@ class NSPredicate_ExtensionsTests: XCTestCase {
         XCTAssertEqual(f[0] as? Int, 5)
     }
 
-    func test_or_operator_with_predicate() {
-        let predicate = NSPredicate(with: [ "SELF": 5 ]) || NSPredicate(with:[ "SELF": 6 ])
+    func test_not() {
+        let predicate = NSPredicate(with: [ "SELF": 0..<9 ]).not()
 
         let f = testArray.filtered(using: predicate)
 
-        XCTAssertEqual(2, f.count)
-        XCTAssertEqual(f[0] as? Int, 5)
-        XCTAssertEqual(f[1] as? Int, 6)
+        XCTAssertEqual(1, f.count)
+        XCTAssertEqual(f[0] as? Int, 9)
     }
 
-    func test_or_operator_with_condition() {
+    func test_or_operator_with_conditions() {
         let predicate = NSPredicate(with: [ "SELF": 5 ]) || [ "SELF": 6 ]
 
         let f = testArray.filtered(using: predicate)
@@ -115,7 +114,26 @@ class NSPredicate_ExtensionsTests: XCTestCase {
         XCTAssertEqual(f[1] as? Int, 6)
     }
 
-    func test_and_operator_with_predicate() {
+    func test_or_operator_with_predicates() {
+        let predicate = NSPredicate(with: [ "SELF": 5 ]) || NSPredicate(with:[ "SELF": 6 ])
+
+        let f = testArray.filtered(using: predicate)
+
+        XCTAssertEqual(2, f.count)
+        XCTAssertEqual(f[0] as? Int, 5)
+        XCTAssertEqual(f[1] as? Int, 6)
+    }
+
+    func test_and_operator_with_conditions() {
+        let predicate = NSPredicate(with: [ "SELF": 5 ]) && [ "SELF": [5, 6] ]
+
+        let f = testArray.filtered(using: predicate)
+
+        XCTAssertEqual(1, f.count)
+        XCTAssertEqual(f[0] as? Int, 5)
+    }
+
+    func test_and_operator_with_predicates() {
         let predicate = NSPredicate(with: [ "SELF": 5 ]) && NSPredicate(with: [ "SELF": [5, 6] ])
 
         let f = testArray.filtered(using: predicate)
@@ -124,12 +142,12 @@ class NSPredicate_ExtensionsTests: XCTestCase {
         XCTAssertEqual(f[0] as? Int, 5)
     }
 
-    func test_and_operator_with_operator() {
-        let predicate = NSPredicate(with: [ "SELF": 5 ]) && [ "SELF": [5, 6] ]
+    func test_not_operator() {
+        let predicate = !NSPredicate(with: [ "SELF": 0..<9 ])
 
         let f = testArray.filtered(using: predicate)
 
         XCTAssertEqual(1, f.count)
-        XCTAssertEqual(f[0] as? Int, 5)
+        XCTAssertEqual(f[0] as? Int, 9)
     }
 }

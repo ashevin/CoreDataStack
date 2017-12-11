@@ -91,6 +91,13 @@ public extension NSPredicate {
         return NSCompoundPredicate(orPredicateWithSubpredicates: [self, predicate])
     }
 
+    /**
+     Returns a predicate which negates the receiver.
+     */
+    public func not() -> NSPredicate {
+        return NSCompoundPredicate(notPredicateWithSubpredicate: self)
+    }
+
     public static func && (left: NSPredicate, right: NSPredicate) -> NSPredicate {
         return left.and(right)
     }
@@ -105,6 +112,10 @@ public extension NSPredicate {
 
     public static func || (left: NSPredicate, right: [String: Any]) -> NSPredicate {
         return left.or(right)
+    }
+
+    public static prefix func ! (term: NSPredicate) -> NSPredicate {
+        return term.not()
     }
 }
 
