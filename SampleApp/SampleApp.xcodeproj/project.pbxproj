@@ -20,7 +20,7 @@
 		82C510E41F9DC0C7009AA241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C510E31F9DC0C7009AA241 /* AppDelegate.swift */; };
 		82C510E61F9DC0C7009AA241 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C510E51F9DC0C7009AA241 /* ViewController.swift */; };
 		82C510E91F9DC0C7009AA241 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C510E71F9DC0C7009AA241 /* Main.storyboard */; };
-		82C510EC1F9DC0C7009AA241 /* CoreDataManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82C510EA1F9DC0C7009AA241 /* CoreDataManager.xcdatamodeld */; };
+		82C510EC1F9DC0C7009AA241 /* SampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 82C510EA1F9DC0C7009AA241 /* SampleApp.xcdatamodeld */; };
 		82C510EE1F9DC0C7009AA241 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82C510ED1F9DC0C7009AA241 /* Assets.xcassets */; };
 		82C510F11F9DC0C7009AA241 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82C510EF1F9DC0C7009AA241 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -184,7 +184,7 @@
 				82C510ED1F9DC0C7009AA241 /* Assets.xcassets */,
 				82C510EF1F9DC0C7009AA241 /* LaunchScreen.storyboard */,
 				82C510F21F9DC0C7009AA241 /* Info.plist */,
-				82C510EA1F9DC0C7009AA241 /* CoreDataManager.xcdatamodeld */,
+				82C510EA1F9DC0C7009AA241 /* SampleApp.xcdatamodeld */,
 			);
 			path = SampleApp;
 			sourceTree = "<group>";
@@ -305,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				82C510EC1F9DC0C7009AA241 /* CoreDataManager.xcdatamodeld in Sources */,
+				82C510EC1F9DC0C7009AA241 /* SampleApp.xcdatamodeld in Sources */,
 				82120B751FCB52D600C949D6 /* BarCell.swift in Sources */,
 				82C510E61F9DC0C7009AA241 /* ViewController.swift in Sources */,
 				82120B391FCA9D3000C949D6 /* NewOldFooViewController.swift in Sources */,
@@ -515,13 +515,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		82C510EA1F9DC0C7009AA241 /* CoreDataManager.xcdatamodeld */ = {
+		82C510EA1F9DC0C7009AA241 /* SampleApp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				82C510EB1F9DC0C7009AA241 /* CoreDataManager.xcdatamodel */,
 			);
 			currentVersion = 82C510EB1F9DC0C7009AA241 /* CoreDataManager.xcdatamodel */;
-			path = CoreDataManager.xcdatamodeld;
+			path = SampleApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

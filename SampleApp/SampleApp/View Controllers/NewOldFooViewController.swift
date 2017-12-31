@@ -68,7 +68,7 @@ class NewOldFooViewController: UIViewController {
             if let bar = self.selectedBar {
                 foo.bar = try? context.load(objectID: bar)
             }
-        }) {
+        }) { _ in
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: nil)
             }

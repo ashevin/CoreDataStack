@@ -59,7 +59,7 @@ class NewOldBarViewController: UIViewController {
             if let foo = self.selectedFoo {
                 bar.foo = try? context.load(objectID: foo)
             }
-        }) {
+        }) { _ in
             self.dismiss(animated: true, completion: nil)
         }
     }

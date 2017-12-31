@@ -160,7 +160,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
         let frSection = tableView.fetchedResultsSection(for: indexPath.section)
 
-        frSection?.configureBlock(cell, indexPath)
+        frSection?.configureBlock?(cell, indexPath)
 
         return cell
     }
