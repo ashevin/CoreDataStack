@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name             = 'CoreDataStack'
+  s.name             = 'SimpleCoreDataStack'
   s.version          = '0.1.0'
   s.summary          = 'A safe, simple, easy-to-use, Core Data stack for iOS.'
   s.description      = <<-DESC
