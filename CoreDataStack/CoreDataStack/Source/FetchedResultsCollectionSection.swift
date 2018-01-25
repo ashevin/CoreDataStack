@@ -58,17 +58,19 @@ public class FetchedResultsCollectionSection: NSObject, NSFetchedResultsControll
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        for (_, indexPath, type, newIndexPath) in changes {
-            let ip = IndexPath(row: indexPath?.row ?? 0, section: section)
-            let nip = IndexPath(row: newIndexPath?.row ?? 0, section: section)
+        collection?.performBatchUpdates({
+            for (_, indexPath, type, newIndexPath) in changes {
+                let ip = IndexPath(row: indexPath?.row ?? 0, section: section)
+                let nip = IndexPath(row: newIndexPath?.row ?? 0, section: section)
 
-            switch type {
-            case .insert: collection?.insertItems(at: [nip])
-            case .delete: collection?.deleteItems(at: [ip])
-            case .update: collection?.reloadItems(at: [ip])
-            case .move: collection?.moveItem(at: ip, to: nip)
+                switch type {
+                case .insert: collection?.insertItems(at: [nip])
+                case .delete: collection?.deleteItems(at: [ip])
+                case .update: collection?.reloadItems(at: [ip])
+                case .move: collection?.moveItem(at: ip, to: nip)
+                }
             }
-        }
+        }, completion: nil)
     }
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
