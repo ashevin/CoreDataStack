@@ -9,12 +9,12 @@
 import UIKit
 import CoreData
 
-public typealias TableCellConfigurationBlock = (UITableViewCell, IndexPath) -> ()
+public typealias CollectionCellConfigurationBlock = (UITableViewCell, IndexPath) -> ()
 
-public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDelegate {
-    weak var table: UITableView?
+public class FetchedResultsCollectionSection: NSObject, NSFetchedResultsControllerDelegate {
+    weak var collection: UICollectionView?
     let section: Int
-    public let configureBlock: TableCellConfigurationBlock?
+    public let configureBlock: CollectionCellConfigurationBlock?
     var frc: NSFetchedResultsController<NSManagedObject>? {
         didSet {
             frc?.delegate = self
@@ -27,11 +27,11 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
         return frc?.fetchedObjects?.count ?? 0
     }
 
-    public init(table: UITableView,
+    public init(collection: UICollectionView,
                 frc: NSFetchedResultsController<NSManagedObject>?,
-                configureBlock: TableCellConfigurationBlock?) {
-        self.table = table
-        self.section = table.fetchedResultsSectionCount
+                configureBlock: CollectionCellConfigurationBlock?) {
+        self.collection = collection
+        self.section = collection.fetchedResultsSectionCount
         self.frc = frc
         self.configureBlock = configureBlock
 
@@ -51,12 +51,24 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
         return objects[indexPath.row] as? NSManagedObject
     }
 
+    private var changes = [(Any, IndexPath?, NSFetchedResultsChangeType, IndexPath?)]()
+
     public func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        table?.beginUpdates()
+        changes = Array()
     }
 
     public func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        table?.endUpdates()
+        for (_, indexPath, type, newIndexPath) in changes {
+            let ip = IndexPath(row: indexPath?.row ?? 0, section: section)
+            let nip = IndexPath(row: newIndexPath?.row ?? 0, section: section)
+
+            switch type {
+            case .insert: collection?.insertItems(at: [nip])
+            case .delete: collection?.deleteItems(at: [ip])
+            case .update: collection?.reloadItems(at: [ip])
+            case .move: collection?.moveItem(at: ip, to: nip)
+            }
+        }
     }
 
     public func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
@@ -64,22 +76,13 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
                            at indexPath: IndexPath?,
                            for type: NSFetchedResultsChangeType,
                            newIndexPath: IndexPath?) {
-        let ip = IndexPath(row: indexPath?.row ?? 0, section: section)
-        let nip = IndexPath(row: newIndexPath?.row ?? 0, section: section)
-
-        switch type {
-        case .insert: table?.insertRows(at: [nip], with: .automatic)
-        case .delete: table?.deleteRows(at: [ip], with: .automatic)
-        case .update: table?.reloadRows(at: [ip], with: .none)
-        case .move:
-            table?.moveRow(at: ip, to: nip)
-        }
+        changes.append((anObject, indexPath, type, newIndexPath))
     }
 }
 
 private var sectionsKey = 0
 
-public extension UITableView {
+public extension UICollectionView {
     public func add(fetchedResultsSection: FetchedResultsTableSection) {
         var sections: NSMutableDictionary? = associatedSections()
 

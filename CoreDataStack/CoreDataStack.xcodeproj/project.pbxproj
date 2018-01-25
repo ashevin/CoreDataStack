@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		824063D02019C6780055D70A /* FetchedResultsCollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 824063CF2019C6780055D70A /* FetchedResultsCollectionSection.swift */; };
 		8246E7381FC84AEE0087140A /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8246E72E1FC84AEE0087140A /* CoreDataStack.framework */; };
 		8246E73D1FC84AEE0087140A /* CoreDataStackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8246E73C1FC84AEE0087140A /* CoreDataStackTests.swift */; };
 		8246E73F1FC84AEE0087140A /* CoreDataStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 8246E7311FC84AEE0087140A /* CoreDataStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		824063CF2019C6780055D70A /* FetchedResultsCollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionSection.swift; sourceTree = "<group>"; };
 		8246E72E1FC84AEE0087140A /* CoreDataStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreDataStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8246E7311FC84AEE0087140A /* CoreDataStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataStack.h; sourceTree = "<group>"; };
 		8246E7321FC84AEE0087140A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				82C410441FD99EEE00D425D6 /* EntityWatcher.swift */,
 				8246E7531FC84B150087140A /* CoreDataStack.swift */,
 				8246E7541FC84B150087140A /* NSPredicate+extensions.swift */,
+				824063CF2019C6780055D70A /* FetchedResultsCollectionSection.swift */,
 				8246E7521FC84B150087140A /* FetchedResultsTableSection.swift */,
 			);
 			path = Source;
@@ -222,6 +225,7 @@
 				8246E7571FC84B150087140A /* NSPredicate+extensions.swift in Sources */,
 				82C410451FD99EEE00D425D6 /* EntityWatcher.swift in Sources */,
 				8246E7551FC84B150087140A /* FetchedResultsTableSection.swift in Sources */,
+				824063D02019C6780055D70A /* FetchedResultsCollectionSection.swift in Sources */,
 				8246E7561FC84B150087140A /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
