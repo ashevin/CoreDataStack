@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.author           = { 'Avi Shevin' => 'avi.github@mail.ashevin.com' }
   s.source           = { :git => 'https://github.com/ashevin/CoreDataStack.git', :tag => s.version.to_s }
   s.ios.deployment_target = '8.0'
-  #s.swift_version    = '3.2'
   s.source_files     = 'CoreDataStack/CoreDataStack/Source/*.swift'
 end
 
