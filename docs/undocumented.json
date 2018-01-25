@@ -93,29 +93,36 @@
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 94,
+      "line": 101,
       "symbol": "NSPredicate.&&(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 98,
+      "line": 105,
       "symbol": "NSPredicate.||(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 102,
+      "line": 109,
       "symbol": "NSPredicate.&&(_:_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
-      "line": 106,
+      "line": 113,
       "symbol": "NSPredicate.||(_:_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/avi/Projects/CoreDataStack/CoreDataStack/CoreDataStack/Source/NSPredicate+extensions.swift",
+      "line": 117,
+      "symbol": "NSPredicate.!(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     }

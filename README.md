@@ -106,3 +106,7 @@ public static func && (left: NSPredicate, right: NSPredicate) -> NSPredicate
 // OR
 public static func || (left: NSPredicate, right: NSPredicate) -> NSPredicate
 ```
+
+# License
+
+This software is under the MIT license.  See [LICENSE](https://github.com/ashevin/CoreDataStack/blob/master/LICENSE) for details.
