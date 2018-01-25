@@ -57,7 +57,7 @@ public extension NSPredicate {
 
      - parameter conditions: The dictionary of key-value pairs which will form the body of the predicate
      */
-    public func and(_ conditions: [String: Any]) -> NSPredicate {
+    @nonobjc public func and(_ conditions: [String: Any]) -> NSPredicate {
         return NSCompoundPredicate(andPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
     }
 
@@ -67,7 +67,7 @@ public extension NSPredicate {
 
      - parameter conditions: The dictionary of key-value pairs which will form the body of the predicate
      */
-    public func or(_ conditions: [String: Any]) -> NSPredicate {
+    @nonobjc public func or(_ conditions: [String: Any]) -> NSPredicate {
         return NSCompoundPredicate(orPredicateWithSubpredicates: [self, NSPredicate(with: conditions)])
     }
 
@@ -77,7 +77,7 @@ public extension NSPredicate {
 
      - parameter predicate: The predicate to combine with the receiver
      */
-    public func and(_ predicate: NSPredicate) -> NSPredicate {
+    @nonobjc public func and(_ predicate: NSPredicate) -> NSPredicate {
         return NSCompoundPredicate(andPredicateWithSubpredicates: [self, predicate])
     }
 
@@ -87,7 +87,7 @@ public extension NSPredicate {
 
      - parameter predicate: The predicate to combine with the receiver
      */
-    public func or(_ predicate: NSPredicate) -> NSPredicate {
+    @nonobjc public func or(_ predicate: NSPredicate) -> NSPredicate {
         return NSCompoundPredicate(orPredicateWithSubpredicates: [self, predicate])
     }
 
