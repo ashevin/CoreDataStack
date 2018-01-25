@@ -29,10 +29,10 @@ public final class CoreDataStack {
 
     private let coordinator: NSPersistentStoreCoordinator
 
-    private let queue = OperationQueue()
-    private let queryQueue = OperationQueue()
-    private var token: AnyObject? = nil
-    private var isShuttingDown = false
+    fileprivate let queue = OperationQueue()
+    fileprivate let queryQueue = OperationQueue()
+    fileprivate var token: AnyObject? = nil
+    fileprivate var isShuttingDown = false
 
     /**
      Create a stack with the given model name, with a store type of `NSSQLiteStoreType`.
