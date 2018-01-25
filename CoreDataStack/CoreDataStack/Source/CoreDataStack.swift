@@ -79,7 +79,9 @@ public final class CoreDataStack {
 
         viewContext = ReadOnlyMOC(concurrencyType: .mainQueueConcurrencyType)
         viewContext.persistentStoreCoordinator = coordinator
-        viewContext.mergePolicy = NSMergePolicy.rollback
+        if #available(iOS 10.0, *) {
+            viewContext.mergePolicy = NSMergePolicy.rollback
+        }
 
         token = NotificationCenter
             .default
@@ -262,7 +264,11 @@ public extension NSManagedObject {
         Provides the entity's name, used with `NSFetchRequest`.
      */
     public static var entityName: String {
-        return self.entity().name ?? String(describing: type(of: self))
+        if #available(iOS 10.0, *) {
+            return self.entity().name ?? String(describing: type(of: self))
+        } else {
+            return String(describing: type(of: self))
+        }
     }
 }
 
@@ -342,7 +348,9 @@ private extension NSManagedObjectContext {
     var backgroundCloneRW: KillableMOC {
         let context = KillableMOC(concurrencyType: .privateQueueConcurrencyType)
         context.persistentStoreCoordinator = self.persistentStoreCoordinator
-        context.mergePolicy = NSMergePolicy.overwrite
+        if #available(iOS 10.0, *) {
+            context.mergePolicy = NSMergePolicy.overwrite
+        }
 
         return context
     }
@@ -350,7 +358,9 @@ private extension NSManagedObjectContext {
     var backgroundCloneRO: ReadOnlyMOC {
         let context = ReadOnlyMOC(concurrencyType: .privateQueueConcurrencyType)
         context.persistentStoreCoordinator = self.persistentStoreCoordinator
-        context.mergePolicy = NSMergePolicy.rollback
+        if #available(iOS 10.0, *) {
+            context.mergePolicy = NSMergePolicy.rollback
+        }
 
         return context
     }
