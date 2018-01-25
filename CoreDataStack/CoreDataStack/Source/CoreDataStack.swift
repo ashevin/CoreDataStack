@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 public enum CoreDataStackError: Error {
-    case missingModelName
+    case missingModel (String)
 }
 
 public typealias CoreDataManagerUpdateBlock = (NSManagedObjectContext, inout Bool) throws -> ()
@@ -46,12 +46,15 @@ public final class CoreDataStack {
     /**
      Create a stack with the given model name and store type.
 
+     If `modelURL` is `nil`, the model is searched for in the Main bundle.
+
      - parameter modelName: The model name within the resource bundle
      - parameter storeType: One of the persistent store types supported by Core Data
+     - parameter modelURL: An optional parameter which gives the local URL to the model.
      */
-    public init(modelName: String, storeType: String) throws {
-        guard let model = CoreDataStack.model(for: modelName) else {
-           throw CoreDataStackError.missingModelName
+    public init(modelName: String, storeType: String, modelURL: URL? = nil) throws {
+        guard let model = CoreDataStack.model(for: modelName, at: modelURL) else {
+           throw CoreDataStackError.missingModel(modelName)
         }
 
         queue.maxConcurrentOperationCount = 1
@@ -118,8 +121,8 @@ public final class CoreDataStack {
             .appendingPathExtension("sqlite")
     }
 
-    private static func model(for name: String) -> NSManagedObjectModel? {
-        guard let url = Bundle.main.url(forResource: name, withExtension: "momd") else {
+    private static func model(for name: String, at url: URL? = nil) -> NSManagedObjectModel? {
+        guard let url = url ?? Bundle.main.url(forResource: name, withExtension: "momd") else {
             return nil
         }
 

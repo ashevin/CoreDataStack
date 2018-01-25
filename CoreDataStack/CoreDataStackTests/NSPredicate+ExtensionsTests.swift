@@ -30,6 +30,7 @@ class NSPredicate_ExtensionsTests: XCTestCase {
 
     func test_contains() {
         let testValue = [ 3 ]
+        let a: Array<Bool> = []
 
         let f = testArray.filtered(using: NSPredicate(with: [ "SELF": testValue ]))
 
