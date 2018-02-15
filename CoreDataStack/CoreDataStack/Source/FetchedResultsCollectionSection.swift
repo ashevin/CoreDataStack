@@ -1,5 +1,5 @@
 //
-//  FetchedResultsTableSection.swift
+//  FetchedResultsCollectionSection.swift
 //  CoreDataManager
 //
 //  Created by Avi Shevin on 24/10/2017.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-public typealias CollectionCellConfigurationBlock = (UITableViewCell, IndexPath) -> ()
+public typealias CollectionCellConfigurationBlock = (UICollectionViewCell, IndexPath) -> ()
 
 public class FetchedResultsCollectionSection: NSObject, NSFetchedResultsControllerDelegate {
     weak var collection: UICollectionView?
@@ -41,7 +41,7 @@ public class FetchedResultsCollectionSection: NSObject, NSFetchedResultsControll
         try? frc?.performFetch()
     }
 
-    public func objectForTable(at indexPath: IndexPath) -> NSManagedObject? {
+    public func objectForCollection(at indexPath: IndexPath) -> NSManagedObject? {
         guard let section = frc?.sections?[0],
             let objects = section.objects,
             indexPath.row < objects.count else {
@@ -85,7 +85,7 @@ public class FetchedResultsCollectionSection: NSObject, NSFetchedResultsControll
 private var sectionsKey = 0
 
 public extension UICollectionView {
-    public func add(fetchedResultsSection: FetchedResultsTableSection) {
+    public func add(fetchedResultsSection: FetchedResultsCollectionSection) {
         var sections: NSMutableDictionary? = associatedSections()
 
         if sections == nil {
@@ -108,12 +108,12 @@ public extension UICollectionView {
         }
     }
 
-    public func fetchedResultsSection(for section: Int) -> FetchedResultsTableSection? {
+    public func fetchedResultsSection(for section: Int) -> FetchedResultsCollectionSection? {
         guard let sections = associatedSections() else {
             return nil
         }
 
-        guard let frSection = sections[section] as? FetchedResultsTableSection else {
+        guard let frSection = sections[section] as? FetchedResultsCollectionSection else {
             return nil
         }
 
@@ -128,9 +128,9 @@ public extension UICollectionView {
         return sections.count
     }
 
-    public func objectForTable(at indexPath: IndexPath) -> NSManagedObject? {
+    public func objectForCollection(at indexPath: IndexPath) -> NSManagedObject? {
         guard let object = fetchedResultsSection(for: indexPath.section)?
-            .objectForTable(at: indexPath) else {
+            .objectForCollection(at: indexPath) else {
             return nil
         }
 
