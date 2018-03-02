@@ -11,9 +11,23 @@ import CoreData
 
 public typealias TableCellConfigurationBlock = (UITableViewCell, IndexPath) -> ()
 
-public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDelegate {
+public protocol TableSection: class {
+    var configureBlock: TableCellConfigurationBlock? { get }
+    var objectCount: Int { get }
+    var section: Int { get }
+
+    func objectForTable(at indexPath: IndexPath) -> NSManagedObject?
+}
+
+extension TableSection {
+    public func objectForTable(at indexPath: IndexPath) -> NSManagedObject? {
+        return nil
+    }
+}
+
+public class FetchedResultsTableSection: NSObject, TableSection, NSFetchedResultsControllerDelegate {
     weak var table: UITableView?
-    let section: Int
+    public let section: Int
     public let configureBlock: TableCellConfigurationBlock?
     var frc: NSFetchedResultsController<NSManagedObject>? {
         didSet {
@@ -31,7 +45,7 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
                 frc: NSFetchedResultsController<NSManagedObject>?,
                 configureBlock: TableCellConfigurationBlock?) {
         self.table = table
-        self.section = table.fetchedResultsSectionCount
+        self.section = table.tableSectionCount
         self.frc = frc
         self.configureBlock = configureBlock
 
@@ -80,7 +94,7 @@ public class FetchedResultsTableSection: NSObject, NSFetchedResultsControllerDel
 private var sectionsKey = 0
 
 public extension UITableView {
-    public func add(fetchedResultsSection: FetchedResultsTableSection) {
+    public func add(tableSection: TableSection) {
         var sections: NSMutableDictionary? = associatedSections()
 
         if sections == nil {
@@ -88,10 +102,10 @@ public extension UITableView {
             objc_setAssociatedObject(self, &sectionsKey, sections, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
 
-        sections?[fetchedResultsSection.section] = fetchedResultsSection
+        sections?[tableSection.section] = tableSection
     }
 
-    public func removeFetchedResultsSection(for section: Int) {
+    public func removeTableSection(for section: Int) {
         guard let sections = associatedSections() else {
             return
         }
@@ -103,19 +117,19 @@ public extension UITableView {
         }
     }
 
-    public func fetchedResultsSection(for section: Int) -> FetchedResultsTableSection? {
+    public func tableSection(for section: Int) -> TableSection? {
         guard let sections = associatedSections() else {
             return nil
         }
 
-        guard let frSection = sections[section] as? FetchedResultsTableSection else {
+        guard let frSection = sections[section] as? TableSection else {
             return nil
         }
 
         return frSection
     }
 
-    public var fetchedResultsSectionCount: Int {
+    public var tableSectionCount: Int {
         guard let sections = associatedSections() else {
             return 0
         }
@@ -124,8 +138,7 @@ public extension UITableView {
     }
 
     public func objectForTable(at indexPath: IndexPath) -> NSManagedObject? {
-        guard let object = fetchedResultsSection(for: indexPath.section)?
-            .objectForTable(at: indexPath) else {
+        guard let object = tableSection(for: indexPath.section)?.objectForTable(at: indexPath) else {
             return nil
         }
 
