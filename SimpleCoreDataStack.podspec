@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SimpleCoreDataStack'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'A safe, simple, easy-to-use, Core Data stack for iOS.'
   s.description      = <<-DESC
   CoreDataStack provides a simple all-in-one Core Data stack. It is designed to make Core Data both safe and easy to use. For applications which require high performance, via multiple writers, this project is not for you.
