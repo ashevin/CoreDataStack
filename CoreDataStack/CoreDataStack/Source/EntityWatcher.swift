@@ -13,7 +13,7 @@ import CoreData
  This class provides a generics and block-based API for `NSFetchedResultsController`.
  */
 
-public class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
+public final class EntityWatcher<T : NSManagedObject>: NSObject, NSFetchedResultsControllerDelegate {
     /**
      The type to which the managed objects will be cast.  This will be the object type received in
      the `Change` paramater of the `change` event handler.
