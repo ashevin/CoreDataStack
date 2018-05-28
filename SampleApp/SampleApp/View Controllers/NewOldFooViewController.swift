@@ -59,7 +59,8 @@ class NewOldFooViewController: UIViewController {
                 foo = loadedFoo
             }
             else {
-                foo = Foo(context: context)
+                foo = Foo(entity: NSEntityDescription.entity(forEntityName: Foo.entityName, in: context)!,
+                          insertInto: context)
             }
 
             foo.name = fooName

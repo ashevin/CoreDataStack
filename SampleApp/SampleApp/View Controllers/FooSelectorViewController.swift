@@ -24,7 +24,7 @@ class FooSelectorViewController: UIViewController {
 
         tableView.tableFooterView = UIView()
 
-        self.tableView.add(fetchedResultsSection: {
+        self.tableView.add(tableSection: {
             let frSection = FetchedResultsTableSection(table: self.tableView,
                                                        frc: createFoosFrc(),
                                                        configureBlock: { [weak self] (cell, indexPath) in
@@ -70,11 +70,11 @@ class FooSelectorViewController: UIViewController {
 
 extension FooSelectorViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableView.fetchedResultsSection(for: section)?.objectCount ?? 0
+        return tableView.tableSection(for: section)?.objectCount ?? 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableView.fetchedResultsSectionCount
+        return tableView.tableSectionCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +82,7 @@ extension FooSelectorViewController: UITableViewDelegate, UITableViewDataSource 
 
         cell = tableView.dequeueReusableCell(withIdentifier: "fooCell", for: indexPath)
 
-        let frSection = tableView.fetchedResultsSection(for: indexPath.section)
+        let frSection = tableView.tableSection(for: indexPath.section)
 
         frSection?.configureBlock?(cell, indexPath)
 

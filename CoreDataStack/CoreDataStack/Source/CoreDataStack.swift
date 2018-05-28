@@ -264,10 +264,20 @@ public extension NSManagedObject {
         Provides the entity's name, used with `NSFetchRequest`.
      */
     public static var entityName: String {
+        let className: () -> String = {
+            let d = description()
+
+            if d.contains(".") {
+                return String(d[d.index(after: d.index(of: ".")!) ... d.endIndex])
+            }
+
+            return d
+        }
+
         if #available(iOS 10.0, *) {
-            return self.entity().name ?? String(describing: type(of: self))
+            return self.entity().name ?? className()
         } else {
-            return String(describing: type(of: self))
+            return className()
         }
     }
 }

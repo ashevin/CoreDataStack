@@ -51,7 +51,8 @@ class NewOldBarViewController: UIViewController {
                 bar = loadedBar
             }
             else {
-                bar = Bar(context: context)
+                bar = Bar(entity: NSEntityDescription.entity(forEntityName: Bar.entityName, in: context)!,
+                          insertInto: context)
             }
 
             bar.name = barName
