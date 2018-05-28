@@ -268,7 +268,7 @@ public extension NSManagedObject {
             let d = description()
 
             if d.contains(".") {
-                return String(d[d.index(after: d.index(of: ".")!) ... d.endIndex])
+                return String(d[d.index(after: d.index(of: ".")!) ..< d.endIndex])
             }
 
             return d
